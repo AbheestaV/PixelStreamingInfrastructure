@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageContainer = document.getElementById("messageContainer");
 
     let token = null;
-
+    
     socket.addEventListener("open", () => {
         console.log("Connected to WebSocket server");
     });
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(`Assigned id: ${message.id}`);
         } else if (message.type === "login_success") {
             token = message.token;
+            localStorage.setItem("authToken", token);
             displayMessage("Login successful! Redirecting to player page...");
             setTimeout(() => {
                 window.location.href = "player.html";
